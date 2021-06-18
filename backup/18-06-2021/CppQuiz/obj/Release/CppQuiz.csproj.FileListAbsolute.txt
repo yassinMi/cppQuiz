@@ -1,0 +1,41 @@
+C:\TOOLS\CppQuiz\CppQuiz\bin\Release\CppQuiz.exe.config
+C:\TOOLS\CppQuiz\CppQuiz\bin\Release\quizzes\precedence\exluded\Precedence.cqw
+C:\TOOLS\CppQuiz\CppQuiz\bin\Release\quizzes\precedence\exluded\Precedence2.cqw
+C:\TOOLS\CppQuiz\CppQuiz\bin\Release\CppQuiz.exe
+C:\TOOLS\CppQuiz\CppQuiz\bin\Release\CppQuiz.pdb
+C:\TOOLS\CppQuiz\CppQuiz\bin\Release\Ookii.Dialogs.Wpf.dll
+C:\TOOLS\CppQuiz\CppQuiz\bin\Release\Ookii.Dialogs.Wpf.pdb
+C:\TOOLS\CppQuiz\CppQuiz\bin\Release\Ookii.Dialogs.Wpf.xml
+C:\TOOLS\CppQuiz\CppQuiz\obj\Release\CppQuiz.csprojResolveAssemblyReference.cache
+C:\TOOLS\CppQuiz\CppQuiz\obj\Release\Simple Styles.baml
+C:\TOOLS\CppQuiz\CppQuiz\obj\Release\Dash.g.cs
+C:\TOOLS\CppQuiz\CppQuiz\obj\Release\Dot.g.cs
+C:\TOOLS\CppQuiz\CppQuiz\obj\Release\MainWindow.g.cs
+C:\TOOLS\CppQuiz\CppQuiz\obj\Release\App.g.cs
+C:\TOOLS\CppQuiz\CppQuiz\obj\Release\GeneratedInternalTypeHelper.g.cs
+C:\TOOLS\CppQuiz\CppQuiz\obj\Release\CppQuiz_MarkupCompile.cache
+C:\TOOLS\CppQuiz\CppQuiz\obj\Release\CppQuiz_MarkupCompile.lref
+C:\TOOLS\CppQuiz\CppQuiz\obj\Release\App.baml
+C:\TOOLS\CppQuiz\CppQuiz\obj\Release\Dash.baml
+C:\TOOLS\CppQuiz\CppQuiz\obj\Release\Dot.baml
+C:\TOOLS\CppQuiz\CppQuiz\obj\Release\MainWindow.baml
+C:\TOOLS\CppQuiz\CppQuiz\obj\Release\CppQuiz.g.resources
+C:\TOOLS\CppQuiz\CppQuiz\obj\Release\CppQuiz.Properties.Resources.resources
+C:\TOOLS\CppQuiz\CppQuiz\obj\Release\CppQuiz.csproj.GenerateResource.Cache
+C:\TOOLS\CppQuiz\CppQuiz\obj\Release\CppQuiz.exe
+C:\TOOLS\CppQuiz\CppQuiz\obj\Release\CppQuiz.pdb
+C:\TOOLS\CppQuiz\CppQuiz\bin\Release\quizzes\Basics.cqw
+C:\TOOLS\CppQuiz\CppQuiz\bin\Release\quizzes\control structures.cqw
+C:\TOOLS\CppQuiz\CppQuiz\bin\Release\quizzes\Operator Precedence and Associativity.cqw
+C:\TOOLS\CppQuiz\CppQuiz\bin\Release\quizzes\Precedence2.cqw
+C:\TOOLS\CppQuiz\CppQuiz\bin\Release\quizzes\variables & types.cqw
+C:\TOOLS\CppQuiz\CppQuiz\bin\Release\Microsoft.Expression.Drawing.dll
+C:\TOOLS\CppQuiz\CppQuiz\bin\Release\de\Microsoft.Expression.Drawing.resources.dll
+C:\TOOLS\CppQuiz\CppQuiz\bin\Release\es\Microsoft.Expression.Drawing.resources.dll
+C:\TOOLS\CppQuiz\CppQuiz\bin\Release\fr\Microsoft.Expression.Drawing.resources.dll
+C:\TOOLS\CppQuiz\CppQuiz\bin\Release\it\Microsoft.Expression.Drawing.resources.dll
+C:\TOOLS\CppQuiz\CppQuiz\bin\Release\ja\Microsoft.Expression.Drawing.resources.dll
+C:\TOOLS\CppQuiz\CppQuiz\bin\Release\ko\Microsoft.Expression.Drawing.resources.dll
+C:\TOOLS\CppQuiz\CppQuiz\bin\Release\ru\Microsoft.Expression.Drawing.resources.dll
+C:\TOOLS\CppQuiz\CppQuiz\bin\Release\zh-Hans\Microsoft.Expression.Drawing.resources.dll
+C:\TOOLS\CppQuiz\CppQuiz\bin\Release\zh-Hant\Microsoft.Expression.Drawing.resources.dll

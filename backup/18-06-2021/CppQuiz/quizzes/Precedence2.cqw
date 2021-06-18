@@ -1,0 +1,59 @@
+//by mi,winterspell 2021
+
+
+//MI 1
+int a=1,b=2,c=3;
+cout << c*(c=b)-(c=--a) << flush ;
+//END
+//MI 2
+int a=1,b=2,c=3;
+cout << (--a)-(++a) << flush ;
+//END
+//MI 3
+int a=1,b=2,c=3;
+cout << (a-(++a)<c/a*b>-b ) << flush ;
+//END
+//MI 4
+int a=1,b=2,c=3;
+cout << --a+c++ *a++ + (a=--c)+(c=--a) << flush ;
+//END
+//MI 5
+int a=1,b=2,c=3;
+cout << (c=a) + ++a << flush ;
+//END
+//MI 6
+int a=1,b=2,c=3;
+cout << (c+a<-b*a-c) << flush ;
+//END
+//MI 7
+int a=1,b=2,c=3;
+cout << c++ - --a +a++ - --c << flush ;
+//END
+//MI 8
+int a=1,b=2,c=3;
+cout << ( c+= (c++)) << flush ;
+//END
+//MI 9
+int a=1,b=2,c=3;
+cout << (b* (c-= (c+= --b) + --c)) << flush ;
+//END
+//MI 10
+int a=1,b=2,c=3;
+cout << a-5+ (a+=1) -b << flush ;
+//END
+//MI 11
+int a=1,b=2,c=3;
+cout << c*2* ++c << flush ;
+//END
+//MI 12
+int a=1,b=2,c=3;
+cout << c*1* ++c << flush ;
+//END
+//MI 13
+int a=1,b=2,c=3;
+cout << (c*1)+ --c << flush ;
+//END
+//MI 14
+int a=1,b=2,c=3;
+cout << (c-0.0)+ --c << flush ;
+//END

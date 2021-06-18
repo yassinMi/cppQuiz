@@ -1,0 +1,41 @@
+C:\TOOLS\CppQuiz\CppQuiz\bin\Debug\CppQuiz.exe.config
+C:\TOOLS\CppQuiz\CppQuiz\bin\Debug\quizzes\Basics.cqw
+C:\TOOLS\CppQuiz\CppQuiz\bin\Debug\quizzes\control structures.cqw
+C:\TOOLS\CppQuiz\CppQuiz\bin\Debug\quizzes\Operator Precedence and Associativity.cqw
+C:\TOOLS\CppQuiz\CppQuiz\bin\Debug\quizzes\Precedence2.cqw
+C:\TOOLS\CppQuiz\CppQuiz\bin\Debug\quizzes\precedence\exluded\Precedence.cqw
+C:\TOOLS\CppQuiz\CppQuiz\bin\Debug\quizzes\precedence\exluded\Precedence2.cqw
+C:\TOOLS\CppQuiz\CppQuiz\bin\Debug\quizzes\variables & types.cqw
+C:\TOOLS\CppQuiz\CppQuiz\bin\Debug\CppQuiz.exe
+C:\TOOLS\CppQuiz\CppQuiz\bin\Debug\CppQuiz.pdb
+C:\TOOLS\CppQuiz\CppQuiz\bin\Debug\Microsoft.Expression.Drawing.dll
+C:\TOOLS\CppQuiz\CppQuiz\bin\Debug\Ookii.Dialogs.Wpf.dll
+C:\TOOLS\CppQuiz\CppQuiz\bin\Debug\Ookii.Dialogs.Wpf.pdb
+C:\TOOLS\CppQuiz\CppQuiz\bin\Debug\Ookii.Dialogs.Wpf.xml
+C:\TOOLS\CppQuiz\CppQuiz\bin\Debug\de\Microsoft.Expression.Drawing.resources.dll
+C:\TOOLS\CppQuiz\CppQuiz\bin\Debug\es\Microsoft.Expression.Drawing.resources.dll
+C:\TOOLS\CppQuiz\CppQuiz\bin\Debug\fr\Microsoft.Expression.Drawing.resources.dll
+C:\TOOLS\CppQuiz\CppQuiz\bin\Debug\it\Microsoft.Expression.Drawing.resources.dll
+C:\TOOLS\CppQuiz\CppQuiz\bin\Debug\ja\Microsoft.Expression.Drawing.resources.dll
+C:\TOOLS\CppQuiz\CppQuiz\bin\Debug\ko\Microsoft.Expression.Drawing.resources.dll
+C:\TOOLS\CppQuiz\CppQuiz\bin\Debug\ru\Microsoft.Expression.Drawing.resources.dll
+C:\TOOLS\CppQuiz\CppQuiz\bin\Debug\zh-Hans\Microsoft.Expression.Drawing.resources.dll
+C:\TOOLS\CppQuiz\CppQuiz\bin\Debug\zh-Hant\Microsoft.Expression.Drawing.resources.dll
+C:\TOOLS\CppQuiz\CppQuiz\obj\Debug\CppQuiz.csprojResolveAssemblyReference.cache
+C:\TOOLS\CppQuiz\CppQuiz\obj\Debug\Simple Styles.baml
+C:\TOOLS\CppQuiz\CppQuiz\obj\Debug\Dash.g.cs
+C:\TOOLS\CppQuiz\CppQuiz\obj\Debug\Dot.g.cs
+C:\TOOLS\CppQuiz\CppQuiz\obj\Debug\MainWindow.g.cs
+C:\TOOLS\CppQuiz\CppQuiz\obj\Debug\App.g.cs
+C:\TOOLS\CppQuiz\CppQuiz\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\TOOLS\CppQuiz\CppQuiz\obj\Debug\CppQuiz_MarkupCompile.cache
+C:\TOOLS\CppQuiz\CppQuiz\obj\Debug\CppQuiz_MarkupCompile.lref
+C:\TOOLS\CppQuiz\CppQuiz\obj\Debug\App.baml
+C:\TOOLS\CppQuiz\CppQuiz\obj\Debug\Dash.baml
+C:\TOOLS\CppQuiz\CppQuiz\obj\Debug\Dot.baml
+C:\TOOLS\CppQuiz\CppQuiz\obj\Debug\MainWindow.baml
+C:\TOOLS\CppQuiz\CppQuiz\obj\Debug\CppQuiz.g.resources
+C:\TOOLS\CppQuiz\CppQuiz\obj\Debug\CppQuiz.Properties.Resources.resources
+C:\TOOLS\CppQuiz\CppQuiz\obj\Debug\CppQuiz.csproj.GenerateResource.Cache
+C:\TOOLS\CppQuiz\CppQuiz\obj\Debug\CppQuiz.exe
+C:\TOOLS\CppQuiz\CppQuiz\obj\Debug\CppQuiz.pdb

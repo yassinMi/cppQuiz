@@ -1,0 +1,2 @@
+float fv=1.0f;
+cout <<  f* --f <<flush;

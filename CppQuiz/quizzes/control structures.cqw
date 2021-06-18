@@ -1,0 +1,56 @@
+//by mi,winterspell 2021
+
+
+//MI 1
+char C[4];
+int k;
+C[0]='a';
+C[3]='J';
+C[2]='k';
+C[1]='R';
+for(k=0;k<4;k++)
+cout << C[k] <<endl;
+for(k=0;k<4;k++)
+C[k]++;
+for(k=0;k<4;k++)
+cout << C[k] <<endl;
+//END
+//MI 2
+
+//END
+//MI 3
+
+//END
+//MI 4
+
+//END
+//MI 5
+
+//END
+//MI 6
+
+//END
+//MI 7
+
+//END
+//MI 8
+
+//END
+//MI 9
+
+//END
+//MI 10
+
+//END
+//MI 11
+
+//END
+//MI 12
+
+//END
+//MI 13
+
+//END
+//MI 14
+
+//END

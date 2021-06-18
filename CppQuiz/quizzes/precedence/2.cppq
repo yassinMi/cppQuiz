@@ -1,0 +1,5 @@
+unsigned int t=1025;
+char str[] = "this is a string";
+int result = 45;
+cout << "test 2"<<flush;
+cout <<  "3" <<flush;

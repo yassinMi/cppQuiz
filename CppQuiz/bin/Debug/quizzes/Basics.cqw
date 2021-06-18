@@ -1,0 +1,72 @@
+//by mi,winterspell 2021
+
+
+//MI 1
+int i =15;
+cout << i << i <<endl;
+//END
+//MI 2
+int i =15;
+cout << i/2  <<endl;
+//END
+//MI 3
+int a;
+float b = 5.6f;
+cout << a=b  << a;
+//END
+//MI 4
+int a=3;
+cout << a++  << " " << ++a;
+//END
+//MI 5
+int a=3;
+while(--a)
+cout << a <<" "<< flush;
+//END
+//MI 6
+int i;
+for(i=0;i<5;i++){
+cout <<"*"<< flush;
+cout <<"-"<< flush;
+}
+cout <<"*"<< flush;
+
+//END
+//MI 7
+int i;
+for(i=0;i<5;i++){
+cout << (i%2)?"*":"" << flush;
+}
+//END
+//MI 8
+int a = 0;
+bool c = (a && ++a);
+cout << a <<c << flush;
+//END
+//MI 9
+cout << (1 < 5 < 6 ) << flush;
+//END
+//MI 10
+int a = 0;
+string s ="1";
+if(++a && --a){
+    s+="1";
+}
+cout << s << a << flush;
+//END
+//MI 11
+int a=3;
+cout << a++  << flush;
+//END
+//MI 12
+int a=3;
+cout << ++a  << flush;
+//END
+//MI 13
+int a=3;
+cout << a++  << a++ << flush;
+//END
+//MI 14
+int a=3;
+cout << --a  << a++ << flush;
+//END

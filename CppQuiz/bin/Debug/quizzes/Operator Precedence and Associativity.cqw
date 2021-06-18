@@ -1,0 +1,87 @@
+//by mi,winterspell 2021
+
+
+//MI 1
+int x=1, z=2;
+z=z/++x ;
+cout << " \n" << z<<endl;
+//END
+//MI 2
+int a=1,b=2,c=3;
+cout << (8*a==+b*2*c++ -c) << flush ;
+//END
+//MI 3
+int a=1,b=2,c=3;
+cout << a++-(--a) << flush ;
+//END
+//MI 4
+int a=1,b=2,c=3;
+cout << b++ * b++ << flush ;
+//END
+//MI 5
+int a=1,b=2,c=3;
+cout << b++ * b-- << flush ;
+//END
+//MI 6
+int a=1,b=2,c=3;
+cout << b++ * ++b << flush ;
+//END
+//MI 7
+int a=1,b=2,c=3;
+cout << b++ * --b << flush ;
+//END
+//MI 8
+int a=1,b=2,c=3;
+cout << b-- * b++ << flush ;
+//END
+//MI 9
+int a=1,b=2,c=3;
+cout << b-- * b-- << flush ;
+//END
+//MI 10
+int a=1,b=2,c=3;
+cout << b-- * ++b << flush ;
+//END
+//MI 11
+int a=1,b=2,c=3;
+cout << b-- * --b << flush ;
+//END
+//MI 12
+int a=1,b=2,c=3;
+cout << ++b * b++ << flush ;
+//END
+//MI 13
+int a=1,b=2,c=3;
+cout << ++b * b-- << flush ;
+//END
+//MI 14
+int a=1,b=2,c=3;
+cout << ++b * ++b << flush ;
+//END
+//MI 15
+int a=1,b=2,c=3;
+cout << ++b * --b << flush ;
+//END
+//MI 16
+int a=1,b=2,c=3;
+cout << --b * b++ << flush ;
+//END
+//MI 17
+int a=1,b=2,c=3;
+cout << --b * b-- << flush ;
+//END
+//MI 18
+int a=1,b=2,c=3;
+cout << --b * ++b << flush ;
+//END
+//MI 19
+int a=1,b=2,c=3;
+cout << --b * --b << flush ;
+//END
+//MI 20
+int a=1,b=2,c=3;
+cout << c * b++ * b-- * --c << flush ;
+//END
+
+	
+

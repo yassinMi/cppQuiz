@@ -1,0 +1,572 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:CppQuiz"
+        xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing" x:Class="CppQuiz.MainWindow"
+        mc:Ignorable="d" Height="429.8" Width="618.325" TextOptions.TextFormattingMode="Display" SnapsToDevicePixels="True" UseLayoutRounding="True" Background="#FF1A1A1D" ResizeMode="CanMinimize" d:DataContext="{x:Type local:Session}" Icon="media/cpp-16-white-lightblue-transparant-bg-black-counter.png">
+    <Window.Resources>
+       
+        <local:EvalToBrush x:Key="EvalToBrush"/>
+        <local:EqualityToVisibility x:Key="EqualityToVisibility"/>
+        <local:BooleanToVisibilityReversed x:Key="BooleanToVisibilityReversed"/>
+        <BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
+        <local:InvertBoolean x:Key="InvertBoolean"/>
+        <ControlTemplate x:Key="ButtonSimpleTemplate" TargetType="{x:Type Button}">
+            <ControlTemplate.Resources>
+                <Storyboard x:Key="Focus">
+                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="border">
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="1"/>
+                    </DoubleAnimationUsingKeyFrames>
+                </Storyboard>
+                <Storyboard x:Key="UnFocus">
+                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="border">
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0.75"/>
+                    </DoubleAnimationUsingKeyFrames>
+                </Storyboard>
+            </ControlTemplate.Resources>
+            <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}" BorderThickness="1" Opacity="0.75">
+                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Border>
+            <ControlTemplate.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded"/>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Trigger.ExitActions>
+                        <BeginStoryboard x:Name="UnFocus_BeginStoryboard" Storyboard="{StaticResource UnFocus}"/>
+                    </Trigger.ExitActions>
+                    <Trigger.EnterActions>
+                        <BeginStoryboard x:Name="Focus_BeginStoryboard" Storyboard="{StaticResource Focus}"/>
+                    </Trigger.EnterActions>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <ControlTemplate x:Key="ButtonControlTemplate1" TargetType="{x:Type Button}">
+            <ControlTemplate.Resources>
+                <Storyboard x:Key="Focus">
+                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="border">
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="1"/>
+                    </DoubleAnimationUsingKeyFrames>
+                </Storyboard>
+                <Storyboard x:Key="UnFocus">
+                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="border">
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0.75"/>
+                    </DoubleAnimationUsingKeyFrames>
+                </Storyboard>
+            </ControlTemplate.Resources>
+            <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}" BorderThickness="0" Opacity="0.75">
+                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            </Border>
+            <ControlTemplate.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded"/>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Trigger.ExitActions>
+                        <BeginStoryboard x:Name="UnFocus_BeginStoryboard" Storyboard="{StaticResource UnFocus}"/>
+                    </Trigger.ExitActions>
+                    <Trigger.EnterActions>
+                        <BeginStoryboard x:Name="Focus_BeginStoryboard" Storyboard="{StaticResource Focus}"/>
+                    </Trigger.EnterActions>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+        <Style x:Key="menustyle" TargetType="{x:Type Button}" BasedOn="{x:Null}">
+            <Setter Property="FocusVisualStyle" Value="{DynamicResource SimpleButtonFocusVisual}"/>
+            <Setter Property="Background" Value="{DynamicResource NormalBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource NormalBorderBrush}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+
+                        <!-- We use Grid as a root because it is easy to add more elements to customize the button -->
+                        <Grid x:Name="Grid">
+                            <Border x:Name="Border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}"/>
+
+                            <!-- Content Presenter is where the text content etc is placed by the control -->
+                            <!-- The bindings are useful so that the control can be parameterized without editing the template -->
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" RecognizesAccessKey="True"/>
+                        </Grid>
+
+                        <!--Each state sets a brush on the Border in the template -->
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="Background" TargetName="Border" Value="#FF363636"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true">
+                                <Setter Property="Background" TargetName="Border" Value="#FF1D1D1D"/>
+                                <Setter Property="BorderBrush" TargetName="Border" Value="#FFBDBDBD"/>
+                            </Trigger>
+                            <Trigger Property="IsEnabled" Value="true"/>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" Value="{DynamicResource DisabledBackgroundBrush}" TargetName="Border"/>
+                                <Setter Property="BorderBrush" Value="{DynamicResource DisabledBorderBrush}" TargetName="Border"/>
+                                <Setter Property="Foreground" Value="{DynamicResource DisabledForegroundBrush}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="userInputTBsTYLE" TargetType="{x:Type TextBox}">
+            <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
+            <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+            <Setter Property="AllowDrop" Value="true"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Grid>
+                            <Border x:Name="Border" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" Padding="2" CornerRadius="0">
+
+                                <!-- The implementation places the Content into the ScrollViewer. It must be named PART_ContentHost for the control to function -->
+                                <ScrollViewer Margin="0" x:Name="PART_ContentHost" Style="{DynamicResource SimpleScrollViewer}" Background="{TemplateBinding Background}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="False">
+                                <Setter Property="Opacity" Value="0.3" TargetName="Border"/>
+                                <Setter Property="Foreground" Value="#FF4D4D4D"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Storyboard x:Key="AnimateResults">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="CorrectAnswersLBL">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="WrongAnswersLBL">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="SkippedLBL">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="ScoreVisual">
+                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.6" Value="0"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.7" Value="0.4"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="0.8"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:1" Value="1"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+        <Style x:Key="QuizCardButton" TargetType="{x:Type Button}" BasedOn="{x:Null}">
+            <Setter Property="FocusVisualStyle" Value="{DynamicResource SimpleButtonFocusVisual}"/>
+            <Setter Property="Background" Value="{DynamicResource NormalBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource NormalBorderBrush}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Button}">
+
+                        <!-- We use Grid as a root because it is easy to add more elements to customize the button -->
+                        <Grid x:Name="Grid">
+
+                            <!-- Content Presenter is where the text content etc is placed by the control -->
+                            <!-- The bindings are useful so that the control can be parameterized without editing the template -->
+                            <Border x:Name="border" Width="Auto" Height="Auto" BorderBrush="#FF838383" BorderThickness="1" Margin="0" Cursor="Hand">
+                                <Border.Background>
+                                    <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+                                        <GradientStop Color="#991A1A1D" Offset="0"/>
+                                        <GradientStop Color="#99161616" Offset="0.495"/>
+                                        <GradientStop Color="#99161616" Offset="0.977"/>
+                                    </LinearGradientBrush>
+                                </Border.Background>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="38"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+                                    <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="10,0" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" RecognizesAccessKey="True"/>
+                                    <TextBlock x:Name="textBlock4_Copy" TextWrapping="Wrap" Text="{Binding Tag, RelativeSource={RelativeSource TemplatedParent}, StringFormat=\{0\} questions}" Foreground="#FFBBBBBB" TextOptions.TextFormattingMode="Display" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" Grid.Row="1" FontSize="12" FontFamily="Segoe UI"/>
+                                </Grid>
+                            </Border>
+                        </Grid>
+
+                        <!--Each state sets a brush on the Border in the template -->
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsKeyboardFocused" Value="true"/>
+                            <Trigger Property="IsMouseOver" Value="true">
+                                <Setter Property="BorderBrush" TargetName="border" Value="#FFA7C7C6"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="true"/>
+                            <Trigger Property="IsEnabled" Value="true"/>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Foreground" Value="{DynamicResource DisabledForegroundBrush}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <ControlTemplate x:Key="ButtonControlAugments" TargetType="{x:Type Button}">
+            <ControlTemplate.Resources>
+                <Storyboard x:Key="Focus">
+                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="border">
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="1"/>
+                    </DoubleAnimationUsingKeyFrames>
+                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="contentPresenter">
+                        <EasingDoubleKeyFrame KeyTime="0" Value="1.08"/>
+                    </DoubleAnimationUsingKeyFrames>
+                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="contentPresenter">
+                        <EasingDoubleKeyFrame KeyTime="0" Value="1.08"/>
+                    </DoubleAnimationUsingKeyFrames>
+                </Storyboard>
+                <Storyboard x:Key="UnFocus">
+                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="border">
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.1" Value="0.75"/>
+                    </DoubleAnimationUsingKeyFrames>
+                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="contentPresenter">
+                        <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                    </DoubleAnimationUsingKeyFrames>
+                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="contentPresenter">
+                        <EasingDoubleKeyFrame KeyTime="0" Value="1"/>
+                    </DoubleAnimationUsingKeyFrames>
+                </Storyboard>
+            </ControlTemplate.Resources>
+            <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}" BorderThickness="1" Opacity="0.75">
+                <ContentPresenter x:Name="contentPresenter" HorizontalAlignment="Center" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5">
+                    <ContentPresenter.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform/>
+                            <SkewTransform/>
+                            <RotateTransform/>
+                            <TranslateTransform/>
+                        </TransformGroup>
+                    </ContentPresenter.RenderTransform>
+                </ContentPresenter>
+            </Border>
+            <ControlTemplate.Triggers>
+                <EventTrigger RoutedEvent="FrameworkElement.Loaded"/>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Trigger.ExitActions>
+                        <BeginStoryboard x:Name="UnFocus_BeginStoryboard" Storyboard="{StaticResource UnFocus}"/>
+                    </Trigger.ExitActions>
+                    <Trigger.EnterActions>
+                        <BeginStoryboard x:Name="Focus_BeginStoryboard" Storyboard="{StaticResource Focus}"/>
+                    </Trigger.EnterActions>
+                </Trigger>
+                <EventTrigger RoutedEvent="UIElement.MouseEnter"/>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+        <DataTemplate x:Key="quizzesCardsLstItemTemplate"  DataType="local:QuizHeader">
+            <DataTemplate.Resources>
+                <Storyboard x:Key="Hover">
+                    <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="titleLBL">
+                        <EasingColorKeyFrame KeyTime="0:0:0.1" Value="#FFF7F7F7"/>
+                    </ColorAnimationUsingKeyFrames>
+                </Storyboard>
+                <Storyboard x:Key="UnHover">
+                    <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="(TextElement.Foreground).(SolidColorBrush.Color)" Storyboard.TargetName="titleLBL">
+                        <EasingColorKeyFrame KeyTime="0:0:0.2" Value="#FFDEDCDC"/>
+                    </ColorAnimationUsingKeyFrames>
+                </Storyboard>
+            </DataTemplate.Resources>
+            <Grid Margin="0">
+                <!-- The bindings are useful so that the control can be parameterized without editing the template -->
+                <Border x:Name="border" Width="Auto" Height="Auto" BorderBrush="#FF838383" BorderThickness="0" Margin="0" Cursor="Hand">
+                    <Border.Background>
+                        <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+                            <GradientStop Color="#991A1A1D" Offset="0"/>
+                            <GradientStop Color="#99161616" Offset="0.495"/>
+                            <GradientStop Color="#99161616" Offset="0.977"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                    <Grid Margin="10,2,10,10">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="38"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+                        <TextBlock x:Name="titleLBL" TextWrapping="Wrap" Text="{Binding Name, FallbackValue=TITLE}" Foreground="#FFDEDCDC" TextOptions.TextFormattingMode="Ideal" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" Grid.Row="0" FontSize="16" FontFamily="Segoe UI"/>
+                        <TextBlock x:Name="questonsCountLbl" TextWrapping="Wrap" Text="{Binding QuestionsCount, FallbackValue=n questions, StringFormat=\{0\} questions}" Foreground="#FFBBBBBB" TextOptions.TextFormattingMode="Display" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0" Grid.Row="1" FontSize="12" FontFamily="Segoe UI" MinWidth="20"/>
+                    </Grid>
+                </Border>
+            </Grid>
+            <DataTemplate.Triggers>
+                <EventTrigger RoutedEvent="UIElement.MouseEnter">
+                    <BeginStoryboard x:Name="Hover_BeginStoryboard" Storyboard="{StaticResource Hover}"/>
+                </EventTrigger>
+                <EventTrigger RoutedEvent="UIElement.MouseLeave">
+                    <BeginStoryboard x:Name="UnHover_BeginStoryboard" Storyboard="{StaticResource UnHover}"/>
+                </EventTrigger>
+            </DataTemplate.Triggers>
+        </DataTemplate>
+        <ItemsPanelTemplate x:Key="quizzesCardsLstItemsPanelTemplate">
+            <WrapPanel IsItemsHost="True"/>
+        </ItemsPanelTemplate>
+        <SolidColorBrush x:Key="miLightblueSelectionFram" Color="#FF69CFE6"/>
+        <Style x:Key="quizzesCardsListGeneraedItemsCounainerTemplate" TargetType="{x:Type ListBoxItem}">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="HorizontalContentAlignment" Value="{Binding HorizontalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+            <Setter Property="VerticalContentAlignment" Value="{Binding VerticalContentAlignment, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"/>
+            <Setter Property="Padding" Value="2,0,0,0"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                        <Border x:Name="Bd" BorderThickness="1" Background="Transparent" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true" BorderBrush="#FF959595" Margin="10">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="true">
+                                <Setter Property="BorderBrush" TargetName="Bd" Value="{DynamicResource miLightblueSelectionFram}"/>
+                            </Trigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsSelected" Value="False"/>
+                                    <Condition Property="IsMouseOver" Value="True"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.InactiveSelectionHighlightTextBrushKey}}"/>
+                                <Setter Property="Background" TargetName="Bd" Value="#00383838"/>
+                                <Setter Property="BorderBrush" TargetName="Bd" Value="#FFEEEEEE"/>
+                            </MultiTrigger>
+                            <MultiTrigger>
+                                <MultiTrigger.Conditions>
+                                    <Condition Property="IsMouseOver" Value="True"/>
+                                    <Condition Property="Selector.IsSelected" Value="True"/>
+                                </MultiTrigger.Conditions>
+                                <Setter Property="BorderBrush" TargetName="Bd" Value="{DynamicResource miLightblueSelectionFram}"/>
+                            </MultiTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style x:Key="simpleListBoxWithWrapPanel" TargetType="{x:Type ListBox}">
+            <Setter Property="SnapsToDevicePixels" Value="true"/>
+            <Setter Property="Background" Value="{DynamicResource WindowBackgroundBrush}"/>
+            <Setter Property="BorderBrush" Value="{DynamicResource SolidBorderBrush}"/>
+            <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+            <Setter Property="ScrollViewer.CanContentScroll" Value="True"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type ListBox}">
+                        <Grid>
+                            <Border x:Name="Border" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"/>
+                            <ScrollViewer Margin="1" Style="{DynamicResource SimpleScrollViewer}" Focusable="false" Background="{TemplateBinding Background}" Template="{DynamicResource scrolfalt}" HorizontalScrollBarVisibility="Disabled" HorizontalContentAlignment="Stretch">
+
+                                <!-- The StackPanel is used to display the children by setting IsItemsHost to be Trus -->
+                                <WrapPanel Margin="2" IsItemsHost="true"/>
+
+                            </ScrollViewer>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Background" Value="{DynamicResource DisabledBackgroundBrush}" TargetName="Border"/>
+                                <Setter Property="BorderBrush" Value="{DynamicResource DisabledBorderBrush}" TargetName="Border"/>
+                            </Trigger>
+                            <Trigger Property="IsGrouping" Value="true">
+                                <Setter Property="ScrollViewer.CanContentScroll" Value="false"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Window.Title>CppQuiz (v0.1.1)</Window.Title>
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="FrameworkElement.Loaded"/>
+    </Window.Triggers>
+    <Grid>
+        <Grid x:Name="mainQuizView" Visibility="{Binding CurrentView, ConverterParameter=quiz, Converter={StaticResource EqualityToVisibility}}" d:IsHidden="True">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="39"/>
+                <RowDefinition Height="62"/>
+                <RowDefinition Height="107*"/>
+                <RowDefinition Height="77*"/>
+                <RowDefinition Height="37"/>
+            </Grid.RowDefinitions>
+            <Grid x:Name="backgroundImg_Copy" Margin="0" Grid.RowSpan="3" Grid.Row="1" Opacity="0.04">
+                <Image x:Name="image3" Margin="0" VerticalAlignment="Center" Height="256" Source="media/cpp-256-white-lightblue-trans-bg-augmented-c.png" HorizontalAlignment="Center"/>
+            </Grid>
+            <Grid x:Name="QuizHeader" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="140*"/>
+                    <ColumnDefinition Width="13*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="10,2.775,0,3.225" TextWrapping="Wrap" Text="{Binding CurrentQuiz.Name, FallbackValue=CPP QUIZ}" FontSize="18.667" VerticalAlignment="Center" FontFamily="Clear Sans Medium" Foreground="#FFA7C7C6" TextOptions.TextFormattingMode="Ideal"/>
+                <Button x:Name="MenuButton" Click="MenuButton_Click" Template="{DynamicResource ButtonControlTemplate1}" Background="#FF202425" Foreground="#FFAECDCC" BorderBrush="#FFA7C7C6" BorderThickness="0" FontFamily="SimHei" FontWeight="Bold" FontSize="14.667" Margin="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="32" Height="32">
+                    <Image x:Name="image" Height="30" Width="30" Source="media/menu-30-light-blue.png"/>
+                </Button>
+                <Grid Grid.Column="1" Width="0" HorizontalAlignment="Right">
+                    <Popup x:Name="menuPopup" HorizontalAlignment="Right" VerticalAlignment="Top" Grid.Column="1" Placement="Left" VerticalOffset="40" PopupAnimation="Slide" StaysOpen="False">
+                        <StackPanel Background="#FF101011" Width="147">
+                            <Button x:Name="HomeButton" Content="Home" Margin="1,2" Height="32" Style="{DynamicResource menustyle}" Background="#FF1C1C1C" BorderBrush="#FF727272" Foreground="Gainsboro" Click="HomeButton_Click" d:LayoutOverrides="LeftPosition, RightPosition"/>
+                            <Button x:Name="loadQuizButton" Content="Load quiz" Margin="1,2" Height="32" d:LayoutOverrides="LeftPosition, RightPosition" Style="{DynamicResource menustyle}" Background="#FF1C1C1C" BorderBrush="#FF727272" Foreground="Gainsboro" Click="loadQuizButton_Click"/>
+                            <Button x:Name="aboutButton" Content="About" Margin="1,2" Height="32" Style="{DynamicResource menustyle}" Background="#FF1C1C1C" BorderBrush="#FF727272" Foreground="Gainsboro" d:LayoutOverrides="LeftPosition, RightPosition" Click="aboutButton_Click"/>
+                        </StackPanel>
+                    </Popup>
+                </Grid>
+            </Grid>
+            <Grid x:Name="ResultsPanel" Margin="0,4" Grid.Row="1" Visibility="{Binding CurrentQuiz.IsEvaluated, Converter={StaticResource BooleanToVisibilityConverter}, FallbackValue=Collapsed}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="157"/>
+                    <ColumnDefinition Width="92"/>
+                    <ColumnDefinition Width="82"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="105"/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="RetryButton" Click="RetryButton_Click" Content="RETRY" Template="{DynamicResource ButtonControlAugments}" Background="#FF202425" Foreground="#FFAECDCC" BorderBrush="#FFA7C7C6" BorderThickness="2" FontFamily="SimHei" FontWeight="Bold" FontSize="14.667" Margin="13,12,14,12" Grid.Column="4" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin"/>
+                <TextBlock x:Name="CorrectAnswersLBL" Grid.Column="1" Margin="0" TextWrapping="Wrap" Text="{Binding CurrentQuiz.Score.Correct, FallbackValue=Correct: -, StringFormat=Correct: \{0:D\}}" Foreground="#FF99F577" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+                <TextBlock x:Name="WrongAnswersLBL" Grid.Column="2" Margin="0" TextWrapping="Wrap" Text="{Binding CurrentQuiz.Score.Wrong, FallbackValue=Wrong: -, StringFormat=Wrong: \{0:D\}}" Foreground="#FFF5834D" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <TextBlock x:Name="SkippedLBL" Grid.Column="3" Margin="0" TextWrapping="Wrap" Text="{Binding CurrentQuiz.Score.Skiped, FallbackValue=Skiped: -, StringFormat=Skiped: \{0:D\}}" Foreground="#FFF5834D" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+                <Grid x:Name="ScoreVisual" Margin="0" Height="48" Width="48" HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <ed:Arc x:Name="bgRing" ArcThickness="5" ArcThicknessUnit="Pixel" EndAngle="360" Fill="#33BBBBBB" HorizontalAlignment="Center" Margin="0" Stretch="None" StartAngle="0" Width="48" Height="48" VerticalAlignment="Center"/>
+                    <ed:Arc x:Name="frontRing" ArcThickness="5" ArcThicknessUnit="Pixel" EndAngle="{Binding CurrentQuiz.Score.Arc, Mode=OneWay}" Fill="#FF7EC764" HorizontalAlignment="Center" Margin="0" Stretch="None" StartAngle="0" Width="48" Height="48" VerticalAlignment="Center"/>
+                    <TextBlock x:Name="percentScoreLBL" Margin="0" TextWrapping="Wrap" Text="{Binding CurrentQuiz.Score.Percent, Mode=OneWay, StringFormat=\{0:F0\}%}" Foreground="#FF7EC764" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="13.333"/>
+                </Grid>
+            </Grid>
+            <Grid x:Name="TopPanel" Margin="0,4" Grid.Row="1" Visibility="{Binding CurrentQuiz.IsEvaluated, Converter={StaticResource BooleanToVisibilityReversed}}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="157"/>
+                    <ColumnDefinition Width="92"/>
+                    <ColumnDefinition Width="82"/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="105"/>
+                </Grid.ColumnDefinitions>
+                <Button x:Name="FinishButton" Click="FinishButton_Click" Content="FINISH" Template="{DynamicResource ButtonControlAugments}" Background="#FF202425" Foreground="#FFAECDCC" BorderBrush="#FFA7C7C6" BorderThickness="2" FontFamily="SimHei" FontWeight="Bold" FontSize="14.667" Margin="13,12,14,12" Grid.Column="4" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" IsEnabled="{Binding CurrentQuiz.CanEvaluate}"/>
+            </Grid>
+            <Border x:Name="QuestionHearder" Margin="10,0" Grid.Row="2" Height="22" VerticalAlignment="Top" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" BorderThickness="0,0,0,0.5">
+                <Border.BorderBrush>
+                    <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+                        <GradientStop Color="#FF333333" Offset="0"/>
+                        <GradientStop Offset="0.672"/>
+                    </LinearGradientBrush>
+                </Border.BorderBrush>
+                <Grid VerticalAlignment="Top">
+                    <TextBlock x:Name="textBlock" TextWrapping="Wrap" Text="What is the output of this program" Foreground="#FF9C9C9C" FontSize="16" FontFamily="SimHei" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="30,0,0,0"/>
+                    <TextBlock x:Name="questionNumberLabel" TextWrapping="Wrap" Text="{Binding CurrentQuiz.CurrentIndexInc, FallbackValue=1., StringFormat=\{0:d\}.}" FontFamily="SimHei" FontSize="16" Foreground="#FF9C9C9C" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0"/>
+                </Grid>
+            </Border>
+            <Grid x:Name="codeSection" Margin="0,40,0,0" Grid.Row="2" Background="#001A1A1D">
+                <ScrollViewer MinHeight="50" Template="{DynamicResource scrolfalt}" VerticalScrollBarVisibility="Auto" Margin="0,0,10,0" >
+                    <RichTextBox x:Name="CodeRTB" FontFamily="Consolas" UseLayoutRounding="True" Background="#001A1A1D" Foreground="#FFEEEEEE" BorderBrush="{x:Null}" BorderThickness="0" MinHeight="40" VerticalAlignment="Top" Loaded="CodeRTB_Loaded" />
+                </ScrollViewer>
+            </Grid>
+            <Border x:Name="AnswerHeader" Margin="10,0" Grid.Row="3" VerticalAlignment="Top" BorderThickness="0,0,0,0.5" Height="22">
+                <Border.BorderBrush>
+                    <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+                        <GradientStop Color="#FF3F3F3F"/>
+                        <GradientStop Offset="0.987" Color="#003E3E40"/>
+                    </LinearGradientBrush>
+                </Border.BorderBrush>
+                <StackPanel Margin="0" Orientation="Horizontal">
+                    <TextBlock x:Name="textBlock3" TextWrapping="Wrap" Text="YOUR ANSWER:" Margin="0" Foreground="#FF9C9C9C" FontSize="16" FontFamily="SimHei" VerticalAlignment="Center" d:LayoutOverrides="HorizontalAlignment, LeftPosition, RightPosition, TopPosition, BottomPosition" HorizontalAlignment="Left"/>
+                    <TextBlock x:Name="textBlock3_Copy" TextWrapping="Wrap" Text="{Binding CurrentQuestion.UserAnswer}" Margin="10,0,0,0" Foreground="#FFE4E1E1" FontFamily="Consolas" VerticalAlignment="Center" HorizontalAlignment="Left" d:LayoutOverrides="TopPosition, BottomPosition"/>
+                    <TextBlock x:Name="eval" TextWrapping="Wrap" Text="{Binding CurrentQuestion.Evaluation, StringFormat=(\{0\})}" Foreground="{Binding CurrentQuestion.Evaluation, Converter={StaticResource EvalToBrush}}" FontFamily="Shruti" VerticalAlignment="Center" Margin="10,0,0,0" Visibility="{Binding CurrentQuiz.IsEvaluated, Converter={StaticResource BooleanToVisibilityConverter}}" HorizontalAlignment="Left"/>
+                </StackPanel>
+            </Border>
+            <Grid x:Name="AnswerSection" Grid.Row="3" Background="#00232323" Margin="0,20,0,0" VerticalAlignment="Top">
+                <TextBox x:Name="UserAnswerTB" d:LayoutOverrides="VerticalAlignment" Margin="10,10,0,10" BorderBrush="#FF333333" Background="#FF1A1A1D" BorderThickness="1" Foreground="#FFE6E4E4" Width="396" HorizontalAlignment="Left" MinHeight="32" Style="{DynamicResource userInputTBsTYLE}" Padding="10,1,1,1" TextChanged="UserAnswerTB_TextChanged" Text="{Binding CurrentQuestion.UserAnswer.Text}" FontFamily="Consolas" IsEnabled="{Binding IsChecked, Converter={StaticResource InvertBoolean}, ElementName=wontCompileCHK}"/>
+                <CheckBox x:Name="wontCompileCHK" Content="Compilation error" HorizontalAlignment="Right" Margin="0,0,10,0" Width="160" Foreground="#FFA7C7C6" FontFamily="Shruti" FontSize="16" Style="{DynamicResource SimpleCheckBox}" VerticalAlignment="Center" Height="20" Padding="6,0,0,0" BorderBrush="{x:Null}" Background="Black" IsChecked="{Binding CurrentQuestion.UserAnswer.WillFailToCompile}" Click="wontCompileCHK_Click"/>
+            </Grid>
+            <Border x:Name="CorrectAnswerSection" Margin="10,0,10,10" Grid.Row="3" VerticalAlignment="Bottom" BorderThickness="0,0,0,0.5" Height="22" Visibility="{Binding CurrentQuiz.IsEvaluated, Converter={StaticResource BooleanToVisibilityConverter}}">
+                <Border.BorderBrush>
+                    <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+                        <GradientStop Color="#FF3F3F3F"/>
+                        <GradientStop Offset="0.987" Color="#003E3E40"/>
+                    </LinearGradientBrush>
+                </Border.BorderBrush>
+                <StackPanel Orientation="Horizontal" d:LayoutOverrides="Height">
+                    <TextBlock x:Name="textBlock4" TextWrapping="Wrap" Text="CORRECT ANSWER:" Foreground="#FF9C9C9C" FontSize="16" FontFamily="SimHei" HorizontalAlignment="Left" VerticalAlignment="Center" d:LayoutOverrides="LeftPosition, RightPosition" Margin="0,2"/>
+                    <TextBlock x:Name="textBlock4_Copy" TextWrapping="Wrap" Text="{Binding CurrentQuestion.CorrectAnswer}" Foreground="#FFEAEAEA" FontFamily="Consolas" VerticalAlignment="Center" Margin="10,0,0,0" HorizontalAlignment="Left"/>
+                </StackPanel>
+            </Border>
+            <Border x:Name="BottomConrols" Grid.Row="4" Background="Transparent" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" BorderThickness="0,0.5,0,0">
+                <Border.BorderBrush>
+                    <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+                        <GradientStop Color="#FF333333" Offset="0.51"/>
+                        <GradientStop Color="#00A6ECE9" Offset="1"/>
+                        <GradientStop Color="#0059B6B2" Offset="0.019"/>
+                    </LinearGradientBrush>
+                </Border.BorderBrush>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="166"/>
+                    </Grid.ColumnDefinitions>
+                    <Border x:Name="NavBar" BorderThickness="0" BorderBrush="#FF333333" Margin="0,3,0,1" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="10"/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <UniformGrid x:Name="uniGrid" Margin="1,0,0,0" Columns="4" Grid.Column="1" HorizontalAlignment="Left">
+                                <local:Dash x:Name="dash1" Margin="0" d:LayoutOverrides="Height" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <local:Dash x:Name="dash1_Copy" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" d:LayoutOverrides="Height"/>
+                                <local:Dash x:Name="dash1_Copy1" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" d:LayoutOverrides="Height"/>
+                                <local:Dash x:Name="dash1_Copy2" Margin="0" HorizontalAlignment="Center" VerticalAlignment="Center" d:LayoutOverrides="Height"/>
+                            </UniformGrid>
+                        </Grid>
+                    </Border>
+                    <Button x:Name="nextButton" Click="nextButton_Click" Content="NEXT &gt;&gt;" HorizontalAlignment="Right" Width="78" Template="{DynamicResource ButtonControlAugments}" Background="#FF202425" Foreground="#FFAECDCC" BorderBrush="#FFA7C7C6" BorderThickness="2" FontFamily="SimHei" FontWeight="Bold" FontSize="14.667" Margin="0,3,4,3" Grid.Column="1" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin"/>
+                    <Button x:Name="backButton" Click="backButton_Click" Content="&lt;&lt; BACK" Margin="0,3" Template="{DynamicResource ButtonControlAugments}" Background="#FF202425" Foreground="#FFB1D1D0" BorderBrush="#FFA7C7C6" FontFamily="SimHei" FontSize="14.667" FontWeight="Bold" Grid.Column="1" Width="78" HorizontalAlignment="Left"/>
+                </Grid>
+            </Border>
+            <Popup x:Name="processingPopup" Margin="0" Placement="Center" Loaded="Popup_Loaded">
+                <Border Background="#FF151515" Height="100" RenderTransformOrigin="0.005,0.019" Width="240" BorderBrush="#FF333333" BorderThickness="1" >
+                    <Grid Margin="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <TextBlock x:Name="compiling_progress_info" Margin="10,0,0,0" TextWrapping="Wrap" Text="{Binding CurrentQuiz.EvaluationProgress.AsStr, FallbackValue='Compiling .. ', Mode=OneWay, StringFormat=Compiling .. (\{0\})}" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="#FFA7C7C6"/>
+                        <ProgressBar Margin="10,16,10,20" Grid.Row="1" Value="{Binding CurrentQuiz.EvaluationProgress.Percent, Mode=OneWay}"/>
+                    </Grid>
+                </Border>
+            </Popup>
+        </Grid>
+        <Grid x:Name="HomeView" Visibility="{Binding CurrentView, ConverterParameter=home, Converter={StaticResource EqualityToVisibility}}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="39"/>
+                <RowDefinition Height="62"/>
+                <RowDefinition Height="85*"/>
+                <RowDefinition Height="47*"/>
+                <RowDefinition Height="37"/>
+            </Grid.RowDefinitions>
+            <Grid x:Name="backgroundImg" Margin="0" Grid.RowSpan="3" Grid.Row="1" Opacity="0.2">
+                <Image x:Name="image2" Margin="0" VerticalAlignment="Center" Height="256" Source="media/cpp-256-white-lightblue-trans-bg-augmented-c.png" HorizontalAlignment="Center"/>
+            </Grid>
+            <Grid x:Name="QuizHeader1" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="140*"/>
+                    <ColumnDefinition Width="13*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="10,2.775,0,3.225" TextWrapping="Wrap" Text="{Binding CurrentQuiz.Name, FallbackValue=CPP QUIZ}" FontSize="18.667" VerticalAlignment="Center" FontFamily="Clear Sans Medium" Foreground="#FFA7C7C6" TextOptions.TextFormattingMode="Ideal"/>
+                <Button x:Name="MenuButton1" Click="MenuButton_Click" Template="{DynamicResource ButtonControlTemplate1}" Background="#FF202425" Foreground="#FFAECDCC" BorderBrush="#FFA7C7C6" BorderThickness="0" FontFamily="SimHei" FontWeight="Bold" FontSize="14.667" Margin="0" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="32" Height="32">
+                    <Image x:Name="image1" Height="30" Width="30" Source="media/menu-30-light-blue.png"/>
+                </Button>
+                <Grid Grid.Column="1" Width="0" HorizontalAlignment="Right">
+                    <Popup x:Name="menuPopup1" HorizontalAlignment="Right" VerticalAlignment="Top" Grid.Column="1" Placement="Left" VerticalOffset="40" PopupAnimation="Slide" StaysOpen="False">
+                        <StackPanel Background="#FF101011" Width="147">
+                            <Button x:Name="loadQuizButton1" Content="Load quiz" Margin="1,2" Height="32" d:LayoutOverrides="LeftPosition, RightPosition" Style="{DynamicResource menustyle}" Background="#FF1C1C1C" BorderBrush="#FF727272" Foreground="Gainsboro" Click="loadQuizButton_Click"/>
+                            <Button x:Name="aboutButton1" Content="About" Margin="1,2" Height="32" Style="{DynamicResource menustyle}" Background="#FF1C1C1C" BorderBrush="#FF727272" Foreground="Gainsboro" d:LayoutOverrides="LeftPosition, RightPosition" Click="aboutButton_Click"/>
+                        </StackPanel>
+                    </Popup>
+                </Grid>
+            </Grid>
+            <ListBox x:Name="quizzesCardsList" Margin="0" Grid.Row="1" Style="{DynamicResource simpleListBoxWithWrapPanel}" ItemTemplate="{DynamicResource quizzesCardsLstItemTemplate}" ItemsPanel="{DynamicResource quizzesCardsLstItemsPanelTemplate}" Background="Transparent" ItemContainerStyle="{DynamicResource quizzesCardsListGeneraedItemsCounainerTemplate}" BorderBrush="#00888888" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden" Grid.RowSpan="3"/>
+            <Border x:Name="BottomConrols1" Grid.Row="4" Background="Transparent" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" BorderThickness="0,0.5,0,0">
+                <Border.BorderBrush>
+                    <LinearGradientBrush EndPoint="1,0" StartPoint="0,0">
+                        <GradientStop Color="#FF333333" Offset="0.51"/>
+                        <GradientStop Color="#00A6ECE9" Offset="1"/>
+                        <GradientStop Color="#0059B6B2" Offset="0.019"/>
+                    </LinearGradientBrush>
+                </Border.BorderBrush>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition Width="166"/>
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="StartQuizButton" Click="StartQuizButton_Click" Content="START QUIZ" HorizontalAlignment="Right" Width="110" Template="{DynamicResource ButtonControlAugments}" Background="#FF202425" Foreground="#FFAECDCC" BorderBrush="#FFA7C7C6" BorderThickness="2" FontFamily="SimHei" FontWeight="Bold" FontSize="14.667" Margin="0,3,4,3" Grid.Column="1" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" IsEnabled="{Binding SelectedItems.Count, ElementName=quizzesCardsList, Mode=OneWay}"/>
+                </Grid>
+            </Border>
+        </Grid>
+    </Grid>
+</Window>

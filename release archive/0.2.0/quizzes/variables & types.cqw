@@ -1,0 +1,52 @@
+//by mi,winterspell 2021
+
+
+//MI 1
+char ch[]={'1','2'};
+cout << ch[0] << ch[1] <<endl;
+//END
+//MI 2
+int A,B,C;
+A =6;
+B =7;
+B =A+1 ;
+C =A + B;
+C =B*A;
+cout << " les valeurs sont: " <<A<<"\t"<<B<<"\t"<<C << "\n";
+//END
+//MI 3
+
+//END
+//MI 4
+
+//END
+//MI 5
+
+//END
+//MI 6
+
+//END
+//MI 7
+
+//END
+//MI 8
+
+//END
+//MI 9
+
+//END
+//MI 10
+
+//END
+//MI 11
+
+//END
+//MI 12
+
+//END
+//MI 13
+
+//END
+//MI 14
+
+//END
